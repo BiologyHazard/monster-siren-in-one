@@ -84,7 +84,7 @@ class MonsterSiren:
         path = folder / file_name
 
         if skip_existing and path.exists():
-            logger.info(f"File {path} already exists, skipping.")
+            logger.info(f"File {path} already exists, SKIPPING.")
             return
 
         with open(path, "wb") as f:
