@@ -24,7 +24,7 @@ a = Analysis(
 )
 pyz = PYZ(a.pure)
 
-file_stem = f"一键下载塞壬唱片官网音乐_{datetime.now().strftime("%Y%m%d")}"
+file_stem = f"monster-siren-in-one_{datetime.now().strftime("%Y%m%d")}"
 
 exe = EXE(
     pyz,
