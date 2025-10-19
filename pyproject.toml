@@ -1,0 +1,14 @@
+[project]
+name = "monster-siren-in-one"
+version = "20251019"
+description = "Download musics from Monster Siren"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.13.0",
+]
