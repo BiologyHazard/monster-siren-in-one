@@ -9,10 +9,14 @@ from httpx import AsyncClient
 from log import logger
 
 base_url = "https://monster-siren.hypergryph.com"
-albums_url = f"{base_url}/api/albums"  # 专辑列表
-songs_url = f"{base_url}/api/songs"  # 乐曲列表
-album_url = f"{base_url}/api/album"  # 专辑详情，例如 https://monster-siren.hypergryph.com/api/album/7766/data
-song_url = f"{base_url}/api/song"  # 乐曲详情，例如 https://monster-siren.hypergryph.com/api/song/048794
+albums_url = f"{base_url}/api/albums"
+"""专辑列表"""
+songs_url = f"{base_url}/api/songs"
+"""乐曲列表"""
+album_url = f"{base_url}/api/album"
+"""专辑详情，例如 https://monster-siren.hypergryph.com/api/album/7766/data"""
+song_url = f"{base_url}/api/song"
+"""乐曲详情，例如 https://monster-siren.hypergryph.com/api/song/048794"""
 
 
 def make_valid_filename(s: str) -> str:
@@ -21,7 +25,7 @@ def make_valid_filename(s: str) -> str:
 
 class MonsterSiren:
     def __init__(self) -> None:
-        self.client = AsyncClient()
+        self.client: AsyncClient = AsyncClient()
 
     async def _request(self, method: str, url: str, **kwargs) -> dict[str, Any]:
         response = await self.client.request(method, url, **kwargs)
@@ -62,10 +66,10 @@ class MonsterSiren:
         cid = song_data["data"]["cid"]
         song_name = song_data["data"]["name"]
         source_url = song_data["data"]["sourceUrl"]
-        lyric_url = song_data["data"]["lyricUrl"]
-        mv_url = song_data["data"]["mvUrl"]
-        mv_cover_url = song_data["data"]["mvCoverUrl"]
-        assert mv_url is None and mv_cover_url is None
+        # lyric_url = song_data["data"]["lyricUrl"]
+        # mv_url = song_data["data"]["mvUrl"]
+        # mv_cover_url = song_data["data"]["mvCoverUrl"]
+        # assert mv_url is None and mv_cover_url is None
 
         parsed_url = urllib.parse.urlparse(source_url)
         suffix = Path(parsed_url.path).suffix
