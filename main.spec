@@ -1,16 +1,14 @@
 # -*- mode: python ; coding: utf-8 -*-
 from datetime import datetime
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-
-    from PyInstaller.building.api import EXE, PYZ
-    from PyInstaller.building.build_main import Analysis
+    from PyInstaller.building.api import EXE, PYZ  # noqa: TC004
+    from PyInstaller.building.build_main import Analysis  # noqa: TC004
 
 
 a = Analysis(
-    ['main.py'],
+    ["main.py"],
     pathex=[],
     binaries=[],
     datas=[],
@@ -24,7 +22,7 @@ a = Analysis(
 )
 pyz = PYZ(a.pure)
 
-file_stem = f"monster-siren-in-one_{datetime.now().strftime("%Y%m%d")}"
+file_stem = f"monster-siren-in-one_{datetime.now().strftime('%Y%m%d')}"
 
 exe = EXE(
     pyz,

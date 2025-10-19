@@ -1,9 +1,8 @@
 import re
 import reprlib
 import urllib.parse
-from typing import BinaryIO
 from pathlib import Path
-from typing import Any
+from typing import Any, BinaryIO
 
 from httpx import AsyncClient
 
@@ -17,21 +16,18 @@ song_url = f"{base_url}/api/song"  # 乐曲详情，例如 https://monster-siren
 
 
 def make_valid_filename(s: str) -> str:
-    return re.sub(r'[\\/:*?"<>|]', '_', s)
+    return re.sub(r'[\\/:*?"<>|]', "_", s)
 
 
 class MonsterSiren:
     def __init__(self) -> None:
         self.client = AsyncClient()
 
-    async def _request(self,
-                       method: str,
-                       url: str,
-                       **kwargs) -> dict[str, Any]:
+    async def _request(self, method: str, url: str, **kwargs) -> dict[str, Any]:
         response = await self.client.request(method, url, **kwargs)
         response.raise_for_status()
         obj = response.json()
-        logger.debug(f'{method.upper()} {url} returned {reprlib.repr(obj)}')
+        logger.debug(f"{method.upper()} {url} returned {reprlib.repr(obj)}")
 
         return obj
 
@@ -87,6 +83,6 @@ class MonsterSiren:
             logger.info(f"File {path} already exists, SKIPPING.")
             return
 
-        with open(path, "wb") as f:
+        with path.open("wb") as f:
             await self.download_file(source_url, f)
         logger.info(f"Downloaded {song_name} ({cid}) to {path} successfully.")
